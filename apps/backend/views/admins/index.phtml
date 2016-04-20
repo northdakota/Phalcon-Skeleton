@@ -1,24 +1,4 @@
-<h2>Поиск admins</h2>
-<form action="/admins/search" method="post">
-    <fieldset>
-
-<fieldset>
-
-    {% for element in form %}
-    <div class="control-group">
-        {{ element.label(['class': 'control-label']) }}
-        <div class="controls">{{ element }}</div>
-    </div>
-    {% endfor %}
-
-    <div class="control-group">
-        {{ submit_button("Search", "class": "btn btn-primary") }}
-    </div>
-
-</fieldset>
-</form>
-
-
-
-
-<div><a href="/admins/add">Add admin</a></div>
+{% extends "base-template.phtml" %}
+{% block title %}АДМИНИСТРАТОРЫ{% endblock %}
+{% block body %}
+{% endblock %}
