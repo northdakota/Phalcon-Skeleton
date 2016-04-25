@@ -9,7 +9,7 @@ use Phalcon\Db\Adapter\Pdo\Mysql as Database;
 use Phalcon\Config\Adapter\Ini as ConfigIni;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Events\Manager as EventsManager;
-
+use Phalcon\Flash\Direct as FlashDirect;
 
 use Multiple\Backend\Plugins\SecurityPlugin;
 use Multiple\Backend\Plugins\NotFoundPlugin;
@@ -26,7 +26,8 @@ class Module
 			'Multiple\Backend\Models'      => '../apps/backend/models/',
 			'Multiple\Backend\Plugins'     => '../apps/backend/plugins/',
 			'Multiple\Library'             => '../apps/library/',
-			'Multiple\Backend\Form'                => '../apps/backend/form/',
+			'Multiple\Library\PHPImageWorkshop' => '../apps/library/PHPImageWorkshop/',
+			'Multiple\Backend\Form'        => '../apps/backend/form/',
 			'Multiple\Backend\Validator'        => '../apps/backend/validator/',
 		));
 
@@ -46,10 +47,10 @@ class Module
 			$eventsManager = new EventsManager();
 
 			// Плагин безопасности слушает события, инициированные диспетчером
-		//	$eventsManager->attach('dispatch:beforeDispatch', new SecurityPlugin);
+			$eventsManager->attach('dispatch:beforeDispatch', new SecurityPlugin);
 
 			// Отлавливаем исключения и not-found исключения, используя NotFoundPlugin
-		//	$eventsManager->attach('dispatch:beforeException', new NotFoundPlugin);
+			//	$eventsManager->attach('dispatch:beforeException', new NotFoundPlugin);
 
 			$dispatcher = new Dispatcher();
 
@@ -75,7 +76,7 @@ class Module
 								//or remove or compiled files or make changes in children
 							));
 							$compiler = $volt->getCompiler();
-							$compiler->addFunction('truncate',function ($str) {return 'substr(' .$str . ')."..."';});
+							$compiler->addFunction('truncate', function ($str) {return 'substr(' .$str . ')."..."';});
 							$compiler->addFilter('strtotime', 'strtotime');
 							return $volt;
 						}
@@ -94,6 +95,10 @@ class Module
 			$session = new SessionAdapter();
 			$session->start();
 			return $session;
+		});
+
+		$di->set('flash', function () {
+			return new FlashDirect();
 		});
 
 	}
