@@ -27,6 +27,7 @@ class Module
 			'Multiple\Backend\Plugins'     => '../apps/backend/plugins/',
 			'Multiple\Library'             => '../apps/library/',
 			'Multiple\Backend\Form'                => '../apps/backend/form/',
+			'Multiple\Backend\Validator'        => '../apps/backend/validator/',
 		));
 
 
