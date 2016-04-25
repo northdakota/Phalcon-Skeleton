@@ -1,7 +1,6 @@
 <?php
 namespace Multiple\Backend\Models;
 use Phalcon\Mvc\Model;
-use Phalcon\Db\RawValue;
 use  Multiple\Library\PHPImageWorkshop\ImageWorkshop;
 
 class Admin extends Model
@@ -17,8 +16,8 @@ class Admin extends Model
     public function initialize()
     {
         $this->setSource("admin");
-        $this->skipAttributesOnCreate(array('avatar','surname','name','patronymic'));
-        $this->skipAttributesOnUpdate(array('avatar','surname','name','patronymic'));
+        //$this->skipAttributesOnCreate(array('avatar','surname','name','patronymic'));
+        //$this->skipAttributesOnUpdate(array('avatar','surname','name','patronymic'));
     }
     public function getSource()
     {
@@ -44,19 +43,24 @@ class Admin extends Model
     }
     public function saveAvatar($avatar){
 
+        $baseLocation = 'files/avatars/';
+        if(count($avatar)){
+            $filename = md5(date('Y-m-d H:i:s:u')).$avatar[0]->getExtension();
+            return $avatar[0]->moveTo($baseLocation . $filename);
 
-        $layer = ImageWorkshop::initFromPath($avatar['tmp_name']);
-        var_dump($layer); exit;
+        }
     }
 
-    public function beforeValidationOnCreate() {
-        /*$metaData = $this->getModelsMetaData();
+    /*public function beforeCreate(){
+        parent::beforeCreate();
+        $metaData = $this->getModelsMetaData();
         $attributes = $metaData->getNotNullAttributes($this);
-        // Set all not null fields to their default value.
+        var_dump($attributes);
         foreach($attributes as $field) {
             if(!isset($this->{$field}) || is_null($this->{$field})) {
                 $this->{$field} = new RawValue('default');
             }
-        }*/
-    }
+        }
+        die();
+    }*/
 }
