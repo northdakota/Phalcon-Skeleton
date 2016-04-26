@@ -16,8 +16,7 @@ class Admin extends Model
     public function initialize()
     {
         $this->setSource("admin");
-        //$this->skipAttributesOnCreate(array('avatar','surname','name','patronymic'));
-        //$this->skipAttributesOnUpdate(array('avatar','surname','name','patronymic'));
+        $this->allowEmptyStringValues(['name', 'surname', 'patronymic', 'phone', 'avatar']);
     }
     public function getSource()
     {
