@@ -1,2 +1,2 @@
 # Phalcon-Skeleton
-Just The Phlcon Project SKeleton
+Just The Phalcon Project SKeleton
