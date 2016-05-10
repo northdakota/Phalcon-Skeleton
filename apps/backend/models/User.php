@@ -3,6 +3,8 @@ namespace Multiple\Backend\Models;
 
 use Phalcon\Mvc\Model;
 use Phalcon\Db\RawValue;
+use Phalcon\Validation;
+use Phalcon\Validation\Validator\Uniqueness;
 
 class User extends Model
 {
@@ -21,6 +23,15 @@ class User extends Model
     {
         $this->setSource('user');
         $this->allowEmptyStringValues(['admin_comment', 'firstname', 'lastname', 'patronymic', 'phone']);
+    }
+
+    public function validation()
+    {
+        $validation = new Validation();
+        $validation->add('email', new Uniqueness(array(
+            'message' => 'The e-mail already exist',
+            'model' => $this)));
+        return $this->validate($validation);
     }
 
     public function getSource()
