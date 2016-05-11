@@ -3,15 +3,6 @@ namespace Multiple\Library;
 use Phalcon\Di;
 use Multiple\Library\PHPMailer\smtp,
     Multiple\Library\PHPMailer\PHPMailer as PHPMailer;
-/*[mail]
-host         = 'smtp.yandex.ru'
-username     = bca.bca.bca
-password     = 'BCA22BCA22'
-security     = tls
-port         = 25
-charset      = UTF-8
-email        = bca.bca.bca@yandex.ru
-from         = BCA*/
 
 class Mailer {
     public static function get(){
