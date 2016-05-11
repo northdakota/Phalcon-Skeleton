@@ -101,5 +101,10 @@ class Module
 			return new FlashDirect();
 		});
 
+		$di->set('mail',function(){
+			$config = new ConfigIni("config/config.ini");
+			return $config->mail->toArray();
+		});
+
 	}
 }
