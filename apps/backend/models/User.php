@@ -27,11 +27,27 @@ class User extends Model
 
     public function validation()
     {
-        $validation = new Validation();
+        #From 2.1.x onwards Phalcon\Mvc\Model\Validation is deprecated,
+        /*$validation = new Validation();
         $validation->add('email', new Uniqueness(array(
-            'message' => 'The e-mail already exist',
+            'message' => 'The e-mail :field already exist',
             'model' => $this)));
-        return $this->validate($validation);
+        return $this->validate($validation);*/
+        /*$this->validate(new Uniqueness(array(
+            'field' => 'email',
+            'message' => 'The e-mail :field already exist')));*/
+
+
+        $this->validate(new \Phalcon\Mvc\Model\Validator\PresenceOf(array(
+            'field'   => 'email',
+            'message' => 'The email not specified'
+        )));
+        $this->validate(new \Phalcon\Mvc\Model\Validator\Uniqueness(array(
+            'field'   => 'email',
+            'message' => 'The e-mail :field already exist'
+        )));
+
+        return ($this->validationHasFailed() != true);
     }
 
     public function getSource()
