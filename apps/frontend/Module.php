@@ -22,6 +22,7 @@ class Module
 			'Multiple\Frontend\Controllers' => '../apps/frontend/controllers/',
 			'Multiple\Frontend\Models' => '../apps/frontend/models/',
 			'Multiple\Library'     => '../apps/library/',
+			'Multiple\Frontend\Form'        => '../apps/frontend/form/',
 		));
 
 		$loader->register();
