@@ -7,6 +7,7 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Password;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Email as EmailValidator;
+use Phalcon\Forms\Element\Radio;
 
 
 class UserForm extends Form
@@ -20,6 +21,9 @@ class UserForm extends Form
             'class' => 'input-field-style',
             'id' => 'prof-firstName',
         ));
+
+        $radio = new Radio("language");
+
         $lastname = new Text("last_name", array(
             'class' => 'input-field-style',
             'id' => 'prof-lastName',
@@ -60,5 +64,6 @@ class UserForm extends Form
         $this->add($lastname);
         $this->add($password);
         $this->add($passwordconfim);
+        $this->add($radio);
     }
 }

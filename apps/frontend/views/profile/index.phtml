@@ -1,0 +1,29 @@
+		<main id="main">
+			<!-- ***************** profile *************** -->
+			<section class="profile-wrap">
+				<div class="profile-holder">
+					<form action="/profile/save" method="POST">
+						<label for="prof-firstName">First name
+							{{ form.render('first_name') }}
+						</label>
+						<label for="prof-lastName">Last name
+							{{ form.render('last_name') }}
+						</label>
+						{{ form.render('language', ['value':'en']) }} EN
+						{{ form.render('language', ['value':'sw']) }} SW
+						<label for="prof-email">Email
+							{{ form.render('email') }}
+						</label>
+						<label for="prof-pass">New password
+							{{ form.render('newpassword') }}
+						</label>
+						<label for="prof-confPass">Confirm password
+							{{ form.render('passwordconfim') }}
+						</label>
+						<input type="submit" value="Confirm" class="submit-button">
+					</form>
+				</div>
+			</section>
+			<!-- ***************************************** -->
+		</main>
+
