@@ -1,2 +1,2 @@
 # Phalcon-Skeleton
-./.gitignore
+[Read more words!](./.gitignore)
