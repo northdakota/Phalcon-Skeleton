@@ -3,8 +3,9 @@
 ### Оглавление
 
 1. Структура
- + [inprogress](#Parag);
- + [inprogress](#Headers);
+ + [Backend + Frontend](#BaF);
+ + [Настройка модулей](#MSettings);
+ + [Роутер](#Route);
 2. Контроллеры
  + [inprogress](#Parag);
  + [inprogress](#Headers);
@@ -27,6 +28,49 @@
 9. Пагинация
 
 ## Структура
+### <a name="BaF"></a>Backend + Frontend
+
+В данном скелете присутсвует двухмодульная структура формирования сайта - для администратора и обычного пользователя.
+Каждый модуль имеет свои настройки, модели, структуру шаблонов и плагинов, конфигурацию. Модули имеют общую библиотеку.
+Расположение модулей
+
+
+* apps/<имя модуля>/
+
+    * config - файлы конфигурации [пример](./apps/backend/config/config.ini)
+    * controllers - классы контроллеров
+    * form - классы форм
+    * models - модели таблиц БД
+    * plugins - плагины
+    * validator - классы валидации
+    * views - шаблоны
+    Module.php - файл модуля
+
+### <a name="MSettings"></a>Настройка модулей
+
+
+
+    $di->set('db', function() {
+    			$config = new ConfigIni("config/config.ini");
+
+    			return new Database($config->database->toArray());
+    		});
+    		$di->set('session', function () {
+    			$session = new SessionAdapter();
+    			$session->start();
+    			return $session;
+    		});
+
+    		$di->set('flash', function () {
+    			return new FlashDirect();
+    		});
+
+    		$di->set('mail',function(){
+    			$config = new ConfigIni("config/config.ini");
+    			return $config->mail->toArray();
+    		});
+
+
 ## Контроллеры
 ## Модели
 ## Шаблоны
