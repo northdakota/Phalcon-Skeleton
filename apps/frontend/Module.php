@@ -9,7 +9,7 @@ use Phalcon\Db\Adapter\Pdo\Mysql as Database;
 use Phalcon\Config\Adapter\Ini as ConfigIni;
 use Phalcon\Mvc\View;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
-
+use Phalcon\Flash\Direct as FlashDirect;
 class Module
 {
 
@@ -35,10 +35,10 @@ class Module
 	{
 		$di->set('translate', function($language) {
 			if(in_array($language, ['en', 'sw']))
-				$dictionary =  new \Phalcon\Config\Adapter\Php("messages/{$language}.php");
+				$dictionary =  new \Phalcon\Config\Adapter\Php("dictionary/{$language}.php");
 			else
-				$dictionary =  new \Phalcon\Config\Adapter\Php("messages/en.php");
-			return new Translate(array("content" => $dictionary->toArray()));
+				$dictionary =  new \Phalcon\Config\Adapter\Php("dictionary/en.php");
+			return new \Phalcon\Translate\Adapter\NativeArray(array("content" => $dictionary->toArray()));
 		});
 		//Registering a dispatcher
 		$di->set('dispatcher', function () {
@@ -56,6 +56,11 @@ class Module
 		$di->set('config',function(){
 			$config = new ConfigIni("config/config.ini");
 			return $config->api->toArray();
+		});
+
+		$di->set('mail',function(){
+			$config = new ConfigIni("config/config.ini");
+			return $config->mail->toArray();
 		});
 
 		//Registering the view component
@@ -78,6 +83,9 @@ class Module
 			$session = new SessionAdapter();
 			$session->start();
 			return $session;
+		});
+		$di->set('flash', function () {
+			return new FlashDirect();
 		});
 	}
 }

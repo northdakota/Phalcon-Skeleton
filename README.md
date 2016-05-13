@@ -88,6 +88,7 @@ $di->set('flash', function () {
 ```
 
 ### <a name="Route"></a>Роутер
+За роутинг отвечает файл * [./public/index.php](./public/index.php)
 ## Контроллеры
 ## Модели
 ## Шаблоны
