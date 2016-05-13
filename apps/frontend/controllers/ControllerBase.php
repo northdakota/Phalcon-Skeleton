@@ -43,7 +43,7 @@ class ControllerBase extends Controller
                if($perm == $controller)
                    $allowed = true;
             }
-
+            $this->view->t = Di::getDefault()->get("translate", [$this->user->language]);
             if(!$allowed)
                 $this->redirect('/login/index');
         } else {

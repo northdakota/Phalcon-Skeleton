@@ -33,7 +33,13 @@ class Module
 	 */
 	public function registerServices($di)
 	{
-
+		$di->set('translate', function($language) {
+			if(in_array($language, ['en', 'sw']))
+				$dictionary =  new \Phalcon\Config\Adapter\Php("messages/{$language}.php");
+			else
+				$dictionary =  new \Phalcon\Config\Adapter\Php("messages/en.php");
+			return new Translate(array("content" => $dictionary->toArray()));
+		});
 		//Registering a dispatcher
 		$di->set('dispatcher', function () {
 			$dispatcher = new Dispatcher();
