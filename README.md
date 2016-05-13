@@ -57,25 +57,35 @@
 
 Файлы [Module.php](./apps/backend/Module.php) отвечают за поведение модуля.
 
-    $di->set('db', function() {
-    			$config = new ConfigIni("config/config.ini");
+В функции registerAutoloaders указываем все папки с подключаемыми модулями. Если забудем это сделать, то не будет работать подклоючение модуля через use.
+В registerServices($di) регистрируем сервисы через раздатчик.
+Пример 1:
+```
+$di->set('flash', function () {
+    return new FlashDirect();
+});
+```
 
-    			return new Database($config->database->toArray());
-    		});
-    		$di->set('session', function () {
-    			$session = new SessionAdapter();
-    			$session->start();
-    			return $session;
-    		});
+Теперь мы можем использовать Flash сообщения в контроллерах.
 
-    		$di->set('flash', function () {
-    			return new FlashDirect();
-    		});
+```$this->flashSession->success("New password has being send on your email");```
 
-    		$di->set('mail',function(){
-    			$config = new ConfigIni("config/config.ini");
-    			return $config->mail->toArray();
-    		});
+```$this->flashSession->error('Email not found');```
+
+Пример 2:
+```
+    $di->set('config',function(){
+        $config = new ConfigIni("config/config.ini");
+        return $config->api->toArray();
+    });
+```
+
+Теперь мы можем получить конфиг для Api
+
+```
+     $di = DI::getDefault();
+     $this->_config = $di->get("config");
+```
 
 ### <a name="Route"></a>Роутер
 ## Контроллеры
