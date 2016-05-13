@@ -103,6 +103,21 @@ $router->add("/:controller/:action/:params", array(
 ```
 
 ## Контроллеры
+### <a name="BaseC"></a>Общий принцип построения
+Контроллер может быть наследником класса Controller. В нашем случае большинство контроллеров наследуют промежуточный класс ControllerBase, в котором реализованны наиболее часто встречающиеся функкции и проверки. К примеру проверка авторизации пользователя и функция редиректа.
+В таком случае синтаксис контроллера:
+```
+namespace Multiple\Модуль(Backend/Frontend)\Controllers;
+
+use Phalcon\Mvc\Controller;
+
+class ИмяController extends (Controller или ControllerBase)
+{
+
+}
+```
+### <a name="Action"></a>Методы Action
+
 ## Модели
 ## Шаблоны
 ### <a name="ShablonsVolt"></a>Шаблоны + Volt
