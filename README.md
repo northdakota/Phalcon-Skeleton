@@ -89,6 +89,17 @@ $di->set('flash', function () {
 
 ### <a name="Route"></a>Роутер
 За роутинг отвечает файл * [./public/index.php](./public/index.php)
+
+Формат роута:
+```
+$router->add("/:controller/:action/:params", array(
+    'module' => 'frontend',
+    'controller' => 1,
+    'action' => 2,
+    'params'=>3
+));
+```
+
 ## Контроллеры
 ## Модели
 ## Шаблоны
