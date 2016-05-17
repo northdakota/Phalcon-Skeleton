@@ -3,8 +3,19 @@ namespace Multiple\Library;
 use Phalcon\Di;
 use Multiple\Library\PHPMailer\smtp,
     Multiple\Library\PHPMailer\PHPMailer as PHPMailer;
+use Phalcon\Mvc\View;
+/*[mail]
+host         = 'smtp.yandex.ru'
+username     = bca.bca.bca
+password     = 'BCA22BCA22'
+security     = tls
+port         = 25
+charset      = UTF-8
+email        = bca.bca.bca@yandex.ru
+from         = BCA*/
 
 class Mailer {
+
     public static function get(){
         $di = DI::getDefault();
         $cf = $di->get("mail");
@@ -21,5 +32,17 @@ class Mailer {
         $mail->SMTPSecure = $cf['security'];
         $mail->SetFrom($cf['email'], $cf['from']);
         return $mail;
+    }
+
+    public static function getTemplate($body, $template, $language = 'en'){
+        $view = new View();
+        $view->setViewsDir('../apps/mailviews/');
+        $view->setDI(new \Phalcon\DI\FactoryDefault());
+        $view->registerEngines(array(
+            ".phtml" => "\Phalcon\Mvc\View\Engine\Volt"
+        ));
+        //Disable several levels
+        $view->setRenderLevel(View::LEVEL_NO_RENDER);
+        return $view->getRender('examplemale', 'test',array('widget'=>1));
     }
 }
