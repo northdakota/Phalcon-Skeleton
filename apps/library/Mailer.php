@@ -34,15 +34,13 @@ class Mailer {
         return $mail;
     }
 
-    public static function getTemplate($body, $template, $language = 'en'){
+    public static function getTemplate($data = [], $folder, $template, $language = 'en'){
         $view = new View();
         $view->setViewsDir('../apps/mailviews/');
         $view->setDI(new \Phalcon\DI\FactoryDefault());
-        $view->registerEngines(array(
-            ".phtml" => "\Phalcon\Mvc\View\Engine\Volt"
-        ));
-        //Disable several levels
+        $view->registerEngines(array(".phtml" => "\Phalcon\Mvc\View\Engine\Volt"));
         $view->setRenderLevel(View::LEVEL_NO_RENDER);
-        return $view->getRender('examplemale', 'test',array('widget'=>1));
+        $view->setVar('t', Di::getDefault()->get("translate", [$language]));
+        return $view->getRender($folder, $template, $data);
     }
 }
