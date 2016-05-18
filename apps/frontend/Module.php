@@ -34,7 +34,7 @@ class Module
 	public function registerServices($di)
 	{
 		$di->set('translate', function($language) {
-			if(in_array($language, ['en', 'sw']))
+			if(in_array($language, ['en', 'sw', 'enmail', 'swmail']))
 				$dictionary =  new \Phalcon\Config\Adapter\Php("dictionary/{$language}.php");
 			else
 				$dictionary =  new \Phalcon\Config\Adapter\Php("dictionary/en.php");

@@ -4,15 +4,6 @@ use Phalcon\Di;
 use Multiple\Library\PHPMailer\smtp,
     Multiple\Library\PHPMailer\PHPMailer as PHPMailer;
 use Phalcon\Mvc\View;
-/*[mail]
-host         = 'smtp.yandex.ru'
-username     = bca.bca.bca
-password     = 'BCA22BCA22'
-security     = tls
-port         = 25
-charset      = UTF-8
-email        = bca.bca.bca@yandex.ru
-from         = BCA*/
 
 class Mailer {
 
@@ -40,7 +31,7 @@ class Mailer {
         $view->setDI(new \Phalcon\DI\FactoryDefault());
         $view->registerEngines(array(".phtml" => "\Phalcon\Mvc\View\Engine\Volt"));
         $view->setRenderLevel(View::LEVEL_NO_RENDER);
-        $view->setVar('t', Di::getDefault()->get("translate", [$language]));
+        $view->setVar('t', Di::getDefault()->get("translate", [$language.'mail']));
         return $view->getRender($folder, $template, $data);
     }
 }

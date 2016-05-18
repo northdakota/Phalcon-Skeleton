@@ -1,0 +1,9 @@
+{% extends "basetemplates/template.phtml" %}
+{% block body %}
+Subject: Your account has been successfully created
+{{t_('greeting', ['name':name])}}<br/><br/>
+{{t_('created_akk_message', ['type':type, 'link':link])}}<br/><br/>
+{{t_('login data', ['login':login])}}<br/>
+{{t_('password data', ['password':password])}}<br/><br/>
+{{t_('redgards message', ['name':sendername])}}
+{% endblock %}
