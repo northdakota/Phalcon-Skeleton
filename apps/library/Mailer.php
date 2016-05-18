@@ -4,7 +4,6 @@ use Phalcon\Di;
 use Multiple\Library\PHPMailer\smtp,
     Multiple\Library\PHPMailer\PHPMailer as PHPMailer;
 use Phalcon\Mvc\View;
-
 class Mailer {
 
     public static function get(){
