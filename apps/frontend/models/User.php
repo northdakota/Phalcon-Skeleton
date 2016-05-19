@@ -58,5 +58,15 @@ class User extends Model
         return false;
     }
 
-
+    public function generatePassword() {
+        $charsL = 'abcdefghijklmnopqrstuvwxyz';
+        $charsU = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $numbers = '0123456789';
+        $specialChars = '!#$&*()_-,.?@[]+-=~^%?:;';
+        $password = substr(str_shuffle($charsL), 0, 3).
+            substr(str_shuffle($charsU), 0, 3).
+            substr(str_shuffle($specialChars), 0, 1).
+            substr(str_shuffle($numbers), 0, 1);
+        return str_shuffle($password);
+    }
 }

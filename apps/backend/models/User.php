@@ -27,27 +27,24 @@ class User extends Model
 
     public function validation()
     {
-        #From 2.1.x onwards Phalcon\Mvc\Model\Validation is deprecated,
-        /*$validation = new Validation();
-        $validation->add('email', new Uniqueness(array(
-            'message' => 'The e-mail :field already exist',
-            'model' => $this)));
-        return $this->validate($validation);*/
-        /*$this->validate(new Uniqueness(array(
-            'field' => 'email',
-            'message' => 'The e-mail :field already exist')));*/
+        if(\Phalcon\Version::get()=="2.0.10"){
+            $this->validate(new \Phalcon\Mvc\Model\Validator\PresenceOf(array(
+                'field'   => 'email',
+                'message' => 'The email not specified'
+            )));
+            $this->validate(new \Phalcon\Mvc\Model\Validator\Uniqueness(array(
+                'field'   => 'email',
+                'message' => 'The e-mail already exists'
+            )));
 
-
-        $this->validate(new \Phalcon\Mvc\Model\Validator\PresenceOf(array(
-            'field'   => 'email',
-            'message' => 'The email not specified'
-        )));
-        $this->validate(new \Phalcon\Mvc\Model\Validator\Uniqueness(array(
-            'field'   => 'email',
-            'message' => 'The e-mail :field already exist'
-        )));
-
-        return ($this->validationHasFailed() != true);
+            return ($this->validationHasFailed() != true);
+        } else {
+            $validation = new Validation();
+            $validation->add('email', new Uniqueness(array(
+                'message' => 'The e-mail already exists',
+                'model' => $this)));
+            return $this->validate($validation);
+        }
     }
 
     public function getSource()
