@@ -152,10 +152,12 @@ return $this->dispatcher->forward(
 ## Модели
 
 3. Модели
- + [Общий принцип построения](#BaseM);
  + [Связи](#Connections);
  + [Пустые строки](#Empty);
  + [Валидация(см. Валидация в моделях)](#Connections);
+
+ ### <a name="BaseM"></a>Общий принцип построения
+Модели
 
 ## Шаблоны
 ### <a name="ShablonsVolt"></a>Шаблоны + Volt

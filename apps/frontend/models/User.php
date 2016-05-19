@@ -14,11 +14,20 @@ class User extends Model
     public $password;
     public $user_type;
     public $activity;
+    public $sessionId;
 
     public function initialize()
     {
         $this->setSource("user");
     }
+
+    public function beforeCreate()
+    {
+        if (!$this->sessionId) { // use default value if the value is not set
+            $this->sessionId = new RawValue('default');
+        }
+    }
+
     public function getSource()
     {
         return "user";
