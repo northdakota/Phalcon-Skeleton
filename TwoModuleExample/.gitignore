@@ -1,0 +1,3 @@
+apps/frontend/config/config.ini
+*.phtml.php
+*.phtml%%e%%.php
