@@ -16,6 +16,11 @@ class Application extends BaseApplication
 	 */
 	protected function registerServices()
 	{
+		$config =  new \Phalcon\Config\Adapter\Php("../config/config.php");
+		if ($config->appmode == 'development') {
+			$debug = new \Phalcon\Debug();
+			$debug->listen();
+		}
 
 		$di = new FactoryDefault();
 
