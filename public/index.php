@@ -31,8 +31,8 @@ class Application extends BaseApplication
 		 */
 		$loader->registerDirs(
 			array(
-				__DIR__ . '/../apps/library/',
-				__DIR__ . '/../apps/plugins/'
+                __DIR__ . '/../apps/library/',
+                __DIR__ . '/../apps/plugins/'
 			)
 		)->register();
 

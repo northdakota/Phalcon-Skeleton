@@ -1,8 +1,0 @@
-*.ini
-*.phtml.php*
-/Micro/public/avatars/clans/*.jpg
-/Micro/public/avatars/clans/*.png
-/Micro/public/avatars/clans/*.gif
-/Micro/public/avatars/players/*.jpg
-/Micro/public/avatars/players/*.png
-/Micro/public/avatars/players/*.gif
